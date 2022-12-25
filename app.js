@@ -28,6 +28,16 @@ app.get("/hospital", (req, res) => {
     res.render("hospital");
 });
 
+app.get("/register/register_p", (req, res) => {
+    res.render("register_p");
+});
+
+app.get("/register/register_h", (req, res) => {
+    res.render("register_h");
+});
+
+
+
 app.listen(3000, (err) => {
     if(err){
         console.log(err);

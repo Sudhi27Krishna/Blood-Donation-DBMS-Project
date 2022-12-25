@@ -1,0 +1,46 @@
+<%- include("partials/header"); -%>
+    <h1>REGISTER YOUR DETAILS</h1>
+    <form action="/register" method="post">
+        <div class="form-div">
+            <label for="name" id="name">Name</label><br>
+            <input type="text" name="name " id="name" placeholder="Enter your name" required>
+        </div>
+        <div class="form-div">
+            <label for="age" id="age">Age</label><br>
+            <input type="number" id="age" name="age" id="age" min="10" max="99" placeholder="Age">
+        </div>
+        <div class="form-div">
+            <label for="dob" id="dob">Email</label><br>
+            <input type="date" name="dob" id="dob" placeholder="Enter your Email" required>
+        </div>
+        <div class="form-radio form-div">
+            <label id="gender">Choose your gender:</label><br>
+            <input type="radio" id="male" name="gender" value="male" checked>
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label>
+            <input type="radio" id="other" name="gender" value="other">
+            <label for="other">Other</label><br>
+        </div>
+        <div class="form-div">
+            <label for="b_grp" id="b_grp">Blood Group</label><br>
+            <input type="text" name="b_grp" id="b_grp" placeholder="Enter your Blood Group" required>
+        </div>
+        <div class="form-div">
+            <label for="city" id="city">City</label><br>
+            <input type="text" name="city" id="city" placeholder="Enter your city" required>
+        </div>
+        <div class="form-div">
+            <label for="phone" id="phone">Phone no:</label><br>
+            <input type="text" id="phone" name="phone" id="phone" placeholder="Enter your phone number">
+        </div>
+        <div class="form-radio form-div">
+            <label id="role">Choose your purpose:</label><br>
+            <input type="radio" id="donate" name="role" value="donate">
+            <label for="donate">Donate</label>
+            <input type="radio" id="need" name="role" value="need">
+            <label for="need">Need</label>
+        </div>
+        <input type="submit" value="Submit">
+    </form>
+    <%- include("partials/footer"); -%>
