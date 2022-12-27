@@ -1,21 +1,21 @@
 <%- include("partials/header"); -%>
     <h1>REGISTER YOUR DETAILS</h1>
-    <form action="/register" method="post">
+    <form action="/register/register_p" method="post">
         <div class="form-div">
             <label for="name" id="name">Name</label><br>
-            <input type="text" name="name " id="name" placeholder="Enter your name" required>
+            <input type="text" name="name" id="name" placeholder="Enter your name" required>
         </div>
         <div class="form-div">
             <label for="age" id="age">Age</label><br>
             <input type="number" id="age" name="age" id="age" min="10" max="99" placeholder="Age">
         </div>
         <div class="form-div">
-            <label for="dob" id="dob">Email</label><br>
-            <input type="date" name="dob" id="dob" placeholder="Enter your Email" required>
+            <label for="dob" id="dob">D.O.B</label><br>
+            <input type="date" name="dob" id="dob">
         </div>
         <div class="form-radio form-div">
             <label id="gender">Choose your gender:</label><br>
-            <input type="radio" id="male" name="gender" value="male" checked>
+            <input type="radio" id="male" name="gender" value="male">
             <label for="male">Male</label>
             <input type="radio" id="female" name="gender" value="female">
             <label for="female">Female</label>
