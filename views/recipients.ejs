@@ -1,3 +1,30 @@
 <%- include("partials/header"); -%>
-<h1>RECIPIENTS PAGE</h1>
+    <h1>RECIPIENTS PAGE</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>AGE</th>
+            <th>DOB</th>
+            <th>GENDER</th>
+            <th>BLOOD GROUP</th>
+            <th>CITY</th>
+            <th>PHONE</th>
+            <th>ROLE</th>
+        </tr>
+
+        <% for (let i = 0; i < results.length; i++) { %>
+            <tr> 
+            <td><%=results[i].pid%></td>
+            <td><%=results[i].name%></td>
+            <td><%=results[i].age%></td>
+            <td><%=results[i].dob%></td>
+            <td><%=results[i].gender%></td>
+            <td><%=results[i].bldgrp%></td>
+            <td><%=results[i].city%></td>
+            <td><%=results[i].phone%></td>
+            <td><%=results[i].role%></td>
+            </tr>
+        <%    } %>
+    </table>
 <%- include("partials/footer"); -%>

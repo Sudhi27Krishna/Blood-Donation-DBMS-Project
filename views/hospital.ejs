@@ -1,26 +1,24 @@
 <%- include("partials/header"); -%>
 <h1>HOSPITAL PAGE</h1>
-<form action="/register" method="post">
-    <div class="form-div">
-        <label for="name" id="name">Name</label><br>
-        <input type="text" name="name " id="name" placeholder="Enter the name" required>
-    </div>
-    <div class="form-div">
-        <label for="b_grp" id="b_grp">Blood Group</label><br>
-        <input type="text" name="b_grp" id="b_grp" placeholder="Enter the Blood Group" required>
-    </div>
-    <div class="form-div">
-        <label for="qty" id="qty">Need Qty</label><br>
-        <input type="text" name="qty" id="qty" placeholder="Enter the quantity needed" required>
-    </div>
-    <div class="form-div">
-        <label for="city" id="city">City</label><br>
-        <input type="text" name="city" id="city" placeholder="Enter the city" required>
-    </div>
-    <div class="form-div">
-        <label for="phone" id="phone">Phone no:</label><br>
-        <input type="text" id="phone" name="phone" id="phone" placeholder="Enter the phone number">
-    </div>
-    <input type="submit" value="Submit">
-</form>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>BLOOD GROUP</th>
+        <th>NEED QTY</th>
+        <th>CITY</th>
+        <th>PHONE</th>
+    </tr>
+
+    <% for (let i = 0; i < results.length; i++) { %>
+        <tr> 
+        <td><%=results[i].hid%></td>
+        <td><%=results[i].name%></td>
+        <td><%=results[i].bldgrp%></td>
+        <td><%=results[i].needqty%></td>
+        <td><%=results[i].city%></td>
+        <td><%=results[i].phone%></td>
+        </tr>
+    <%    } %>
+</table>
 <%- include("partials/footer"); -%>

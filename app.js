@@ -6,7 +6,7 @@ const mysql = require("mysql2");
 const app = express();
 
 app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 const con = mysql.createConnection({
@@ -43,11 +43,19 @@ app.get("/donors", (req, res) => {
 });
 
 app.get("/recipients", (req, res) => {
-    res.render("recipients");
+    let sql = 'SELECT * FROM person where role="need";';
+    con.query(sql, function (error, results) {
+        if (error) throw error;
+        res.render("recipients", { results: results });
+    });
 });
 
 app.get("/hospital", (req, res) => {
-    res.render("hospital");
+    let sql = 'SELECT * FROM hospital;';
+    con.query(sql, function (error, results) {
+        if (error) throw error;
+        res.render("hospital", { results: results });
+    });
 });
 
 app.get("/register/register_p", (req, res) => {
@@ -59,7 +67,6 @@ app.get("/register/register_h", (req, res) => {
 });
 
 app.post("/register/register_p", (req, res) => {
-    let cnt = 1;
     const name = req.body.name;
     const age = req.body.age;
     const dob = req.body.dob;
@@ -76,9 +83,28 @@ app.post("/register/register_p", (req, res) => {
         }
         else {
             console.log("Data inserted..");
-            console.log(result);
-            cnt++;
+            console.log(sql);
             res.render("register_p");
+        }
+    });
+});
+
+app.post("/register/register_h", (req, res) => {
+    const name = req.body.name;
+    const b_grp = req.body.b_grp;
+    const needqty = req.body.needqty;
+    const city = req.body.city;
+    const phone = req.body.phone;
+
+    let sql = "insert into hospital (name,bldgrp,needqty,city,phone) values('" + name + "','" + b_grp + "'," + needqty + ",'" + city + "','" + phone + "');";
+    con.query(sql, (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            console.log("Data inserted..");
+            console.log(sql);
+            res.render("register_h");
         }
     });
 });
