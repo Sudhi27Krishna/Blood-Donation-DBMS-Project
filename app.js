@@ -35,7 +35,7 @@ app.get("/register", (req, res) => {
 });
 
 app.get("/donors", (req, res) => {
-    let sql = 'SELECT * FROM person where role="donate";';
+    let sql = 'SELECT * FROM donors;';
     con.query(sql, function (error, results) {
         if (error) throw error;
         res.render("donors", { results: results });
@@ -43,7 +43,7 @@ app.get("/donors", (req, res) => {
 });
 
 app.get("/recipients", (req, res) => {
-    let sql = 'SELECT * FROM person where role="need";';
+    let sql = 'SELECT * FROM recipients;';
     con.query(sql, function (error, results) {
         if (error) throw error;
         res.render("recipients", { results: results });
@@ -64,6 +64,18 @@ app.get("/register/register_p", (req, res) => {
 
 app.get("/register/register_h", (req, res) => {
     res.render("register_h");
+});
+
+app.get("/transfer", (req, res) => {
+    res.render("transfer");
+});
+
+app.get("/transfer/transfer_p", (req, res) => {
+    res.render("transfer_p");
+});
+
+app.get("/transfer/transfer_h", (req, res) => {
+    res.render("transfer_h");
 });
 
 app.post("/register/register_p", (req, res) => {
@@ -105,6 +117,24 @@ app.post("/register/register_h", (req, res) => {
             console.log("Data inserted..");
             console.log(sql);
             res.render("register_h");
+        }
+    });
+});
+
+app.post("/transfer", (req, res) => {
+    const donorID = req.body.donorID;
+    const recipientID = req.body.recipientID;
+
+    let sql = "delete from person where pid in (" + donorID + "," + recipientID + ");";
+    con.query(sql, (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            console.log("Data deleted..");
+            console.log(result);
+            console.log(sql);
+            res.render("transfer");
         }
     });
 });

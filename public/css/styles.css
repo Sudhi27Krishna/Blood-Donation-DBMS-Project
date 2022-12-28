@@ -86,7 +86,43 @@ input[type="submit"]:hover {
 }
 
 .footer p {
-    margin-top: 25px;
-    font-size: 12px;
+    margin: 20px 0;
+    font-size: 16px;
     color: #fff;
+}
+
+.form-container {
+    display: flex;
+    align-items: center;
+}
+
+.textbox {
+    width: 180px;
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0 10px;
+}
+
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 8px 28px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 15px 15px;
+    cursor: pointer;
+}
+
+.arrow-container {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.arrow {
+    font-size: 20px;
 }

@@ -1,0 +1,18 @@
+<%- include("partials/header"); -%>
+    <h1>INDIVIDUAL TRANSFER PAGE</h1>
+
+    <form action="/transfer" method="post">
+        <div class="form-container">
+            <input type="text" class="textbox" name="b_grp" placeholder="Enter the blood type">
+            <div class="arrow-container">
+                <i class="arrow">➜</i>
+            </div>
+            <input type="number" class="textbox" name="donorID" placeholder="Enter the donor's id">
+            <div class="arrow-container">
+                <i class="arrow">➜</i>
+            </div>
+            <input type="number" class="textbox" name="recipientID" placeholder="Enter the recipient's id">
+            <button type="submit" class="btn button">Transfer</button>
+        </div>
+    </form>
+<%- include("partials/footer"); -%>
