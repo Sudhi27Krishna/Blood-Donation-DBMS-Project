@@ -1,3 +1,16 @@
 <%- include("partials/header"); -%>
 <h1>BLOOD BANK PAGE</h1>
+<table>
+    <tr>
+        <th>BLOOD GROUP</th>
+        <th>QTY(IN ML)</th>
+    </tr>
+
+    <% for (let i = 0; i < results.length; i++) { %>
+        <tr> 
+        <td><%=results[i].bldgrp%></td>
+        <td><%=results[i].qty%></td>
+        </tr>
+    <%    } %>
+</table>
 <%- include("partials/footer"); -%>

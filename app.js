@@ -78,6 +78,14 @@ app.get("/transfer/transfer_h", (req, res) => {
     res.render("transfer_h");
 });
 
+app.get("/bank", (req, res) => {
+    let sql = 'SELECT * FROM bank;';
+    con.query(sql, function (error, results) {
+        if (error) throw error;
+        res.render("bank", { results: results });
+    });
+});
+
 app.post("/register/register_p", (req, res) => {
     const name = req.body.name;
     const age = req.body.age;
@@ -86,9 +94,10 @@ app.post("/register/register_p", (req, res) => {
     const b_grp = req.body.b_grp;
     const city = req.body.city;
     const phone = req.body.phone;
+    const qty = req.body.qty;
     const role = req.body.role;
 
-    let sql = "insert into person (name,age,dob,gender,bldgrp,city,phone,role) values('" + name + "'," + age + ",'" + dob + "','" + gender + "','" + b_grp + "','" + city + "','" + phone + "','" + role + "');";
+    let sql = "insert into person (name,age,dob,gender,bldgrp,city,phone,qty,role) values('" + name + "'," + age + ",'" + dob + "','" + gender + "','" + b_grp + "','" + city + "','" + phone + "'," + qty + ",'" + role + "');";
     con.query(sql, (err, result) => {
         if (err) {
             console.log(err);
