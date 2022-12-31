@@ -113,11 +113,11 @@ app.post("/register/register_p", (req, res) => {
 app.post("/register/register_h", (req, res) => {
     const name = req.body.name;
     const b_grp = req.body.b_grp;
-    const needqty = req.body.needqty;
+    const qty = req.body.qty;
     const city = req.body.city;
     const phone = req.body.phone;
 
-    let sql = "insert into hospital (name,bldgrp,needqty,city,phone) values('" + name + "','" + b_grp + "'," + needqty + ",'" + city + "','" + phone + "');";
+    let sql = "insert into hospital (name,bldgrp,qty,city,phone) values('" + name + "','" + b_grp + "'," + qty + ",'" + city + "','" + phone + "');";
     con.query(sql, (err, result) => {
         if (err) {
             console.log(err);
@@ -130,7 +130,7 @@ app.post("/register/register_h", (req, res) => {
     });
 });
 
-app.post("/transfer", (req, res) => {
+app.post("/transfer/transfer_p", (req, res) => {
     const donorID = req.body.donorID;
     const recipientID = req.body.recipientID;
 
@@ -143,7 +143,24 @@ app.post("/transfer", (req, res) => {
             console.log("Data deleted..");
             console.log(result);
             console.log(sql);
-            res.render("transfer");
+            res.render("transfer_p");
+        }
+    });
+});
+
+app.post("/transfer/transfer_h", (req, res) => {
+    const hID = req.body.hID;
+
+    let sql = "delete from hospital where hid = " + hID + ";";
+    con.query(sql, (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            console.log("Data deleted..");
+            console.log(result);
+            console.log(sql);
+            res.render("transfer_h");
         }
     });
 });
