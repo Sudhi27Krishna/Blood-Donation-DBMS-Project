@@ -19,7 +19,7 @@
             <td><%=results[i].pid%></td>
             <td><%=results[i].name%></td>
             <td><%=results[i].age%></td>
-            <td><%=results[i].dob%></td>
+            <td><%=results[i].dob.toISOString().substring(0, 10);%></td>
             <td><%=results[i].gender%></td>
             <td><%=results[i].bldgrp%></td>
             <td><%=results[i].city%></td>

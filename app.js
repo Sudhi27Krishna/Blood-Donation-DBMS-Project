@@ -71,7 +71,11 @@ app.get("/transfer", (req, res) => {
 });
 
 app.get("/transfer/transfer_p", (req, res) => {
-    res.render("transfer_p");
+    let sql2 = 'SELECT * FROM history_p;';
+    con.query(sql2, function (error, results) {
+        if (error) throw error;
+        res.render("transfer_p", { results: results });
+    });
 });
 
 app.get("/transfer/transfer_h", (req, res) => {
@@ -133,6 +137,47 @@ app.post("/register/register_h", (req, res) => {
 app.post("/transfer/transfer_p", (req, res) => {
     const donorID = req.body.donorID;
     const recipientID = req.body.recipientID;
+    const t_date = req.body.t_date;
+    const t_grp = req.body.b_grp;
+    var d_name;
+    var r_name;
+    var t_qty;
+
+    let query1 = "select name from person where pid=" + donorID + ";";
+    con.query(query1, (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            d_name = result[0].name;
+            console.log(t_date);
+            console.log(t_grp);
+            console.log(d_name);
+        }
+    });
+
+    let query2 = "select name,qty from person where pid=" + recipientID + ";";
+    con.query(query2, (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            r_name = result[0].name;
+            t_qty = result[0].qty;
+            console.log(r_name);
+            console.log(t_qty);
+        }
+
+        let query3 = "insert into history_p (bldgrp, d_name, r_name, qty, t_date) values(?, ?, ?, ?, ?)";
+        con.query(query3, [t_grp, d_name, r_name, t_qty, t_date], (err, result) => {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                console.log(result);
+            }
+        });
+    });
 
     let sql = "delete from person where pid in (" + donorID + "," + recipientID + ");";
     con.query(sql, (err, result) => {
@@ -143,7 +188,7 @@ app.post("/transfer/transfer_p", (req, res) => {
             console.log("Data deleted..");
             console.log(result);
             console.log(sql);
-            res.render("transfer_p");
+            res.redirect("/transfer/transfer_p");
         }
     });
 });

@@ -1,8 +1,14 @@
 <%- include("partials/header"); -%>
     <h1>INDIVIDUAL TRANSFER PAGE</h1>
 
+   <div class="transfer-p">
     <form action="/transfer/transfer_p" method="post">
         <div class="form-container">
+            <label for="t_date">Transfer date</label>
+            <input type="date" class="textbox" name="t_date" id="t_date" placeholder="Enter the date">
+            <div class="arrow-container">
+                <i class="arrow">➜</i>
+            </div>
             <input type="text" class="textbox" name="b_grp" placeholder="Enter the blood type">
             <div class="arrow-container">
                 <i class="arrow">➜</i>
@@ -15,4 +21,28 @@
             <button type="submit" class="btn button">Transfer</button>
         </div>
     </form>
+   </div>
+
+    <h2>TRANSFER HISTORY RECORDS</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>DATE</th>
+            <th>BLOOD GROUP</th>
+            <th>DONOR'S NAME</th>
+            <th>RECIPIENT'S NAME</th>
+            <th>QTY</th>
+        </tr>
+
+        <% for (let i = 0; i < results.length; i++) { %>
+            <tr> 
+            <td><%=results[i].h_id%></td>
+            <td><%=results[i].t_date.toISOString().substring(0, 10);%></td>
+            <td><%=results[i].bldgrp%></td>
+            <td><%=results[i].d_name%></td>
+            <td><%=results[i].r_name%></td>
+            <td><%=results[i].qty%></td>
+            </tr>
+        <%    } %>
+    </table>
 <%- include("partials/footer"); -%>

@@ -27,6 +27,8 @@ form {
 label {
     display: inline;
     margin-bottom: 8px;
+    padding-right: 10px;
+    padding-top: 5px;
 }
 
 .form-div {
@@ -92,8 +94,14 @@ input[type="submit"]:hover {
 }
 
 .form-container {
+    position: absolute;
+    right: 200px;
     display: flex;
     align-items: center;
+}
+
+.transfer-p {
+    padding-bottom: 100px;
 }
 
 .textbox {
