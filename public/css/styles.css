@@ -55,6 +55,14 @@ input[type="submit"]:hover {
     background-color: #45a049;
 }
 
+.home-img {
+    width: 800px;
+    height: 400px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .container-fluid {
     padding-top: 70px;
     padding-bottom: 70px;
@@ -100,7 +108,7 @@ input[type="submit"]:hover {
     align-items: center;
 }
 
-.transfer-p {
+.transfer {
     padding-bottom: 100px;
 }
 

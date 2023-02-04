@@ -79,7 +79,11 @@ app.get("/transfer/transfer_p", (req, res) => {
 });
 
 app.get("/transfer/transfer_h", (req, res) => {
-    res.render("transfer_h");
+    let sql2 = 'SELECT * FROM history_h;';
+    con.query(sql2, function (error, results) {
+        if (error) throw error;
+        res.render("transfer_h", { results: results });
+    });
 });
 
 app.get("/bank", (req, res) => {
@@ -195,6 +199,59 @@ app.post("/transfer/transfer_p", (req, res) => {
 
 app.post("/transfer/transfer_h", (req, res) => {
     const hID = req.body.hID;
+    const t_date = req.body.t_date;
+    const t_grp = req.body.b_grp;
+    const d_id = req.body.d_id;
+    let h_name;
+    let d_name;
+    let qty;
+
+    let query = "select name from person where pid = " + d_id + ";";
+    con.query(query, (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            d_name = result[0].name;
+            console.log(result);
+            console.log(query);
+        }
+    });
+
+    let query1 = "select name, qty from hospital where hid = " + hID + ";";
+    con.query(query1, (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            qty = result[0].qty;
+            h_name = result[0].name;
+            console.log(qty);
+            console.log(h_name);
+        }
+
+        let query2 = "insert into history_h (bldgrp, name, d_name, qty, t_date) values(?, ?, ?, ?, ?)";
+        con.query(query2, [t_grp, h_name, d_name, qty, t_date], (err, result) => {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                console.log(result);
+                console.log(query2);
+            }
+        });
+    });
+
+    let query3 = "delete from person where pid = " + d_id + ";";
+    con.query(query3, (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            console.log(result);
+            console.log(query3);
+        }
+    });
 
     let sql = "delete from hospital where hid = " + hID + ";";
     con.query(sql, (err, result) => {
@@ -205,7 +262,7 @@ app.post("/transfer/transfer_h", (req, res) => {
             console.log("Data deleted..");
             console.log(result);
             console.log(sql);
-            res.render("transfer_h");
+            res.redirect("/transfer/transfer_h");
         }
     });
 });
