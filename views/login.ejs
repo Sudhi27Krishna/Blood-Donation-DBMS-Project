@@ -1,0 +1,20 @@
+<%- include("partials/header2"); -%>
+    <div class="login-form">
+        <h1>Log In</h1>
+        <form action="/login" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            <br><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            <br><br>
+            <button type="submit">Submit</button>
+        </form>
+
+        <% if(!log){ %>
+            <div class="message">
+                <p>Psyychh!!! that's the wrong username or password</p>
+            </div>
+            <% } %>
+    </div>
+<%- include("partials/footer2"); -%>

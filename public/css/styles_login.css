@@ -1,0 +1,61 @@
+.login-form {
+    position: relative;
+    top: 50px;
+    width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+    border: 2px solid #1abc9c;
+    border-radius: 10px;
+    background-color: #1abc9c;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-items: center;
+}
+
+.message{
+    position: relative;
+    top: 10px;
+    color: red;
+}
+
+h1 {
+    color: black;
+    margin-bottom: 40px;
+}
+
+form {
+    width: 85%;
+    margin: 0 auto;
+}
+
+input[type="text"],
+input[type="password"] {
+    text-align: center;
+    width: 300px;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button[type="submit"] {
+    text-align: center;
+    background-color: #4CAF50;
+    width: 300px;
+    padding: 10px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+label {
+    font-size: 20px;
+}

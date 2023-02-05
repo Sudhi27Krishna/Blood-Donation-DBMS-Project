@@ -5,19 +5,19 @@
         <form action="/transfer/transfer_h" method="post">
             <div class="form-container">
                 <label for="t_date">Transfer date</label>
-                <input type="date" class="textbox" name="t_date" id="t_date" placeholder="Enter the date">
+                <input type="date" class="textbox" name="t_date" id="t_date" placeholder="Enter the date" required>
                 <div class="arrow-container">
                     <i class="arrow">➜</i>
                 </div>
-                <input type="text" class="textbox" name="b_grp" placeholder="Enter the blood type">
+                <input type="text" class="textbox" name="b_grp" placeholder="Enter the blood type" required>
                 <div class="arrow-container">
                     <i class="arrow">➜</i>
                 </div>
-                <input type="number" class="textbox" name="d_id" placeholder="Enter the donor id">
+                <input type="number" class="textbox" name="d_id" placeholder="Enter the donor id" required>
                 <div class="arrow-container">
                     <i class="arrow">➜</i>
                 </div>
-                <input type="number" class="textbox" name="hID" placeholder="Enter the hospital's id">
+                <input type="number" class="textbox" name="hID" placeholder="Enter the hospital's id" required>
                 <button type="submit" class="btn button">Transfer</button>
             </div>
         </form>

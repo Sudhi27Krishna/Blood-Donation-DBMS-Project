@@ -30,6 +30,10 @@ app.get("/", (req, res) => {
     res.render("home");
 });
 
+app.get("/login", (req, res) => {
+    res.render("login", {log : true});
+});
+
 app.get("/register", (req, res) => {
     res.render("register");
 });
@@ -91,6 +95,22 @@ app.get("/bank", (req, res) => {
     con.query(sql, function (error, results) {
         if (error) throw error;
         res.render("bank", { results: results });
+    });
+});
+
+app.post("/login", (req, res) => {
+    const name = req.body.username;
+    const pass = req.body.password;
+
+    let query = "SELECT * FROM login WHERE username = ? AND pass = ?";
+    con.query(query, [name, pass], (err, results) => {
+        if (err) throw err;
+
+        if (results.length > 0) {
+            res.render("home");
+        } else {
+            res.render("login", {log : false});
+        }
     });
 });
 

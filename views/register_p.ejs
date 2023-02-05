@@ -7,19 +7,19 @@
         </div>
         <div class="form-div">
             <label for="age" id="age">Age</label><br>
-            <input type="number" id="age" name="age" id="age" min="18" max="99" placeholder="Age">
+            <input type="number" id="age" name="age" id="age" min="18" max="99" placeholder="Age" required>
         </div>
         <div class="form-div">
             <label for="dob" id="dob">D.O.B</label><br>
-            <input type="date" name="dob" id="dob">
+            <input type="date" name="dob" id="dob" required>
         </div>
         <div class="form-radio form-div">
             <label id="gender">Choose your gender:</label><br>
-            <input type="radio" id="male" name="gender" value="male">
+            <input type="radio" id="male" name="gender" value="male" required>
             <label for="male">Male</label>
-            <input type="radio" id="female" name="gender" value="female">
+            <input type="radio" id="female" name="gender" value="female" required>
             <label for="female">Female</label>
-            <input type="radio" id="other" name="gender" value="other">
+            <input type="radio" id="other" name="gender" value="other" required>
             <label for="other">Other</label><br>
         </div>
         <div class="form-div">
@@ -32,19 +32,19 @@
         </div>
         <div class="form-div">
             <label for="phone" id="phone">Phone no:</label><br>
-            <input type="text" id="phone" name="phone" id="phone" placeholder="Enter your phone number">
+            <input type="text" id="phone" name="phone" id="phone" placeholder="Enter your phone number" required>
         </div>
         <div class="form-div">
             <label for="qty" id="qty">Blood Quantity(in ml):</label><br>
-            <input type="number" id="qty" name="qty" id="qty" min="460" max="500">
+            <input type="number" id="qty" name="qty" id="qty" min="460" max="500" required>
         </div>
         <div class="form-radio form-div">
             <label id="role">Choose your purpose:</label><br>
-            <input type="radio" id="donate" name="role" value="donate">
+            <input type="radio" id="donate" name="role" value="donate" required>
             <label for="donate">Donate</label>
-            <input type="radio" id="need" name="role" value="need">
+            <input type="radio" id="need" name="role" value="need" required>
             <label for="need">Need</label>
         </div>
         <input type="submit" value="Submit">
     </form>
-    <%- include("partials/footer"); -%>
+<%- include("partials/footer"); -%>
