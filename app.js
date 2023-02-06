@@ -30,8 +30,16 @@ app.get("/", (req, res) => {
     res.render("home");
 });
 
+app.get("/home1", (req, res) => {
+    res.render("home1");
+});
+
 app.get("/login", (req, res) => {
-    res.render("login", {log : true});
+    res.render("login", { log: true });
+});
+
+app.get("/about", (req, res) => {
+    res.render("about");
 });
 
 app.get("/register", (req, res) => {
@@ -107,9 +115,9 @@ app.post("/login", (req, res) => {
         if (err) throw err;
 
         if (results.length > 0) {
-            res.render("home");
+            res.render("home1");
         } else {
-            res.render("login", {log : false});
+            res.render("login", { log: false });
         }
     });
 });

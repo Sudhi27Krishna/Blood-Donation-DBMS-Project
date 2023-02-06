@@ -56,11 +56,12 @@ input[type="submit"]:hover {
 }
 
 .home-img {
-    width: 800px;
-    height: 400px;
+    width: 900px;
+    height: 500px;
     display: block;
     margin-left: auto;
     margin-right: auto;
+    border: 2px solid rgba(178, 46, 46, 0.844);
 }
 
 .container-fluid {
@@ -143,11 +144,18 @@ input[type="submit"]:hover {
     font-size: 20px;
 }
 
-.background-image {
+.background-image-transfer {
     background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAUM_moMrwGiBCVgUL-Pu0B1Gn9b_z10ecHA&usqp=CAU");
     background-size: cover;
     height: 60vh;
-    opacity: 0.5;
+    opacity: 0.65;
+}
+
+.background-image-register {
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9rLDX23PZz_ReetBrzFJ2uIpqYQ4AgsJgCQ&usqp=CAU");
+    background-size: cover;
+    height: 60vh;
+    opacity: 0.9;
 }
 
 .content {
@@ -157,5 +165,9 @@ input[type="submit"]:hover {
     transform: translate(-50%, -50%);
     left: 50%;
     bottom: 25%;
+    font-weight: bolder;
+}
 
+h5 {
+    font-weight: bolder;
 }
