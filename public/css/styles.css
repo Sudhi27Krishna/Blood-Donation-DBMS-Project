@@ -142,3 +142,20 @@ input[type="submit"]:hover {
 .arrow {
     font-size: 20px;
 }
+
+.background-image {
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAUM_moMrwGiBCVgUL-Pu0B1Gn9b_z10ecHA&usqp=CAU");
+    background-size: cover;
+    height: 60vh;
+    opacity: 0.5;
+}
+
+.content {
+    padding: 20px;
+    text-align: center;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    bottom: 25%;
+
+}
