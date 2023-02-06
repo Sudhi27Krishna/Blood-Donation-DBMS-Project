@@ -59,3 +59,29 @@ button[type="submit"]:hover {
 label {
     font-size: 20px;
 }
+
+.about-us {
+    font-family: 'Maven Pro', sans-serif;
+    font-size: 15px;
+    border: 0;
+    border-radius: 0;
+    font-weight: bolder;
+    background-color: white;
+}
+
+.about-us-div {
+    font-weight: bold;
+}
+
+.not-pre {
+    padding-left: 70px;
+    font-weight: bold;
+}
+
+.not-pre h2 {
+    text-decoration: underline;
+}
+
+.not-pre li {
+    font-size: 20px;
+}
