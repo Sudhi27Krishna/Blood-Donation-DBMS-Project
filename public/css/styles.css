@@ -148,7 +148,7 @@ input[type="submit"]:hover {
     background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAUM_moMrwGiBCVgUL-Pu0B1Gn9b_z10ecHA&usqp=CAU");
     background-size: cover;
     height: 60vh;
-    opacity: 0.65;
+    opacity: 0.5;
 }
 
 .background-image-register {
