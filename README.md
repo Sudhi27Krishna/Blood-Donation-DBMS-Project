@@ -24,6 +24,6 @@ npm install -g nodemon
 ```
 Type the command and press enter, wait for the files to be downloaded
 ```
-node install body-parser ejs express mysql2
+npm i
 ```
 
