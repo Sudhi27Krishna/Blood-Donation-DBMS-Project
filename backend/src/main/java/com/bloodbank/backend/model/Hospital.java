@@ -19,7 +19,7 @@ public class Hospital {
     @GeneratedValue
     private Long id;
     private String name;
-    private Long contact;
+    private String email;
     private String address;
 
     @OneToMany(mappedBy = "hospital")

@@ -1,6 +1,5 @@
 package com.bloodbank.backend.model;
 
-import com.bloodbank.backend.enums.BloodType;
 import com.bloodbank.backend.enums.RequestStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -18,7 +17,7 @@ public class BloodRequest {
     @Id
     @GeneratedValue
     private Long id;
-    private BloodType bloodType;
+    private String bloodType;
     private LocalDateTime date;
     private Integer qty;
     private RequestStatus status;
