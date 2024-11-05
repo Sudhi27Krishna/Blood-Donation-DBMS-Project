@@ -1,9 +1,10 @@
 package com.bloodbank.backend.request;
 
-public record CreateDonationRequest(
+import java.time.LocalDateTime;
+
+public record CreateBloodRequest(
         String bloodType,
         Integer qty,
-        Long donorId
+        Long recipientId
 ) {
-
 }
