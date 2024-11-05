@@ -9,12 +9,19 @@ import com.bloodbank.backend.request.UpdatePersonRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class PersonService implements IPersonService {
     private final PersonRepository personRepository;
+
+    @Override
+    public List<Person> getAllPersons() {
+        return personRepository.findAll();
+    }
+
     @Override
     public Person getPersonById(Long id) {
         return personRepository.findById(id).
