@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter
@@ -26,9 +25,7 @@ public class BloodRequest {
     @JoinColumn(name = "recipient_id")
     private Recipient recipient;
 
-    @ManyToMany
-    @JoinTable(name = "request_inventory",  joinColumns = @JoinColumn(name = "request_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "inventory_id", referencedColumnName = "bloodType")
-    )
-    private List<BloodInventory> inventory;
+    @ManyToOne
+    @JoinColumn(name = "inventory_id")
+    private BloodInventory inventory;
 }

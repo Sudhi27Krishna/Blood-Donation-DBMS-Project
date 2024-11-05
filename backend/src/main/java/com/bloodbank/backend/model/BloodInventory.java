@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -13,13 +14,26 @@ import java.util.List;
 @Entity
 public class BloodInventory {
     @Id
-    @GeneratedValue
     private String bloodType;
-    private Integer availableQty;
+    private Integer availableQty = 0;
 
-    @ManyToMany(mappedBy = "inventory")
-    private List<BloodDonation> bloodDonationList;
+    @OneToMany(mappedBy = "inventory")
+    private List<BloodDonation> bloodDonationList = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "inventory")
-    private List<BloodRequest> bloodRequestList;
+    @OneToMany(mappedBy = "inventory")
+    private List<BloodRequest> bloodRequestList = new ArrayList<>();
+
+    public void acceptDonation(BloodDonation donation){
+        this.availableQty += donation.getQty();
+        bloodDonationList.add(donation);
+    }
+
+    public void acceptRequest(BloodRequest request){
+        this.availableQty -= request.getQty();
+        bloodRequestList.add(request);
+    }
+
+    public void deductBloodQty(Integer qty){
+        this.availableQty -= qty;
+    }
 }
