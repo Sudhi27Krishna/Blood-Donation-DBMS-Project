@@ -1,5 +1,6 @@
 package com.bloodbank.backend.service.person;
 
+import com.bloodbank.backend.dto.PersonDto;
 import com.bloodbank.backend.model.Person;
 import com.bloodbank.backend.request.CreatePersonRequest;
 import com.bloodbank.backend.request.UpdatePersonRequest;
@@ -11,5 +12,6 @@ public interface IPersonService {
     Person getPersonById(Long id);
     Person createPerson(CreatePersonRequest request);
 
+    PersonDto convertToDto(Person person);
     Person updatePerson(Long id, UpdatePersonRequest personRequest);
 }
