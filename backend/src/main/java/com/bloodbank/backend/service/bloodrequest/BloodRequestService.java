@@ -1,8 +1,8 @@
 package com.bloodbank.backend.service.bloodrequest;
 
+import com.bloodbank.backend.dto.BloodRequestDto;
 import com.bloodbank.backend.enums.RequestStatus;
 import com.bloodbank.backend.exception.ResourceNotFoundException;
-import com.bloodbank.backend.model.BloodInventory;
 import com.bloodbank.backend.model.BloodRequest;
 import com.bloodbank.backend.repository.BloodRequestRepository;
 import com.bloodbank.backend.request.CreateBloodRequest;
@@ -10,8 +10,10 @@ import com.bloodbank.backend.service.bloodinventory.BloodInventoryService;
 import com.bloodbank.backend.service.person.IPersonService;
 import com.bloodbank.backend.service.recipient.IRecipientService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +25,7 @@ public class BloodRequestService implements IBloodRequestService {
     private final IPersonService personService;
     private final BloodRequestRepository bloodRequestRepository;
     private final BloodInventoryService bloodInventoryService;
+    private final ModelMapper modelMapper;
 
     @Override
     public BloodRequest createBloodRequest(CreateBloodRequest request) {
@@ -35,8 +38,8 @@ public class BloodRequestService implements IBloodRequestService {
                     bloodRequest.setDate(currentDateTime);
                     bloodRequest.setRecipient(recipient);
                     // inventory deduction
-                    BloodInventory bloodInventory = bloodInventoryService.acceptRequest(bloodRequest);
-                    bloodRequest.setInventory(bloodInventory);
+//                    BloodInventory bloodInventory = bloodInventoryService.acceptRequest(bloodRequest);
+//                    bloodRequest.setInventory(bloodInventory);
                     bloodRequest.setStatus(RequestStatus.PENDING);
                     recipient.setLastRequestDate(currentDateTime);
                     recipient.getBloodRequestList().add(bloodRequest);
@@ -51,7 +54,19 @@ public class BloodRequestService implements IBloodRequestService {
     }
 
     @Override
-    public List<BloodRequest> getBloodRequestsByDate(LocalDateTime dateTime) {
-        return bloodRequestRepository.findByDate(dateTime);
+    public List<BloodRequest> getBloodRequestsByDate(LocalDate date) {
+        LocalDateTime startOfDay = date.atStartOfDay();  // Start of the given day
+        LocalDateTime endOfDay = date.plusDays(1).atStartOfDay();  // Start of the next day (exclusive)
+        return bloodRequestRepository.findAllByDateBetween(startOfDay, endOfDay);
+    }
+
+    @Override
+    public List<BloodRequest> getAllBloodRequests(){
+        return bloodRequestRepository.findAll();
+    }
+
+    @Override
+    public BloodRequestDto convertToDto(BloodRequest bloodRequest) {
+        return modelMapper.map(bloodRequest, BloodRequestDto.class);
     }
 }
