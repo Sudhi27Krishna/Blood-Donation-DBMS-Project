@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface DonorRepository extends JpaRepository<Donor, Long> {
     Donor findByPersonId(Long id);
+
+    boolean existsByPersonId(Long pId);
 }

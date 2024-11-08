@@ -26,9 +26,11 @@ public class BloodDonationService implements IBloodDonationService {
                 .map(donor -> {
                     BloodDonation donation = new BloodDonation();
                     donation.setBloodType(request.bloodType());
-                    donation.setDate(LocalDateTime.now());
+                    LocalDateTime currentDateTime = LocalDateTime.now();
+                    donation.setDate(currentDateTime);
                     donation.setQty(request.qty());
                     donation.setDonor(donor);
+                    donor.setLastDonationDate(currentDateTime);
                     // inventory addition
                     BloodInventory bloodInventory = bloodInventoryService.acceptDonation(donation);
                     donation.setInventory(bloodInventory);

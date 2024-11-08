@@ -28,7 +28,12 @@ public class PersonService implements IPersonService {
     @Override
     public Person getPersonById(Long id) {
         return personRepository.findById(id).
-                orElseThrow(() -> new ResourceNotFoundException("User does not exist!"));
+                orElseThrow(() -> new ResourceNotFoundException("Person not found!"));
+    }
+
+    @Override
+    public List<Person> getPersonByBloodType(String bloodType) {
+        return personRepository.findByBloodType(bloodType);
     }
 
     @Override
@@ -45,7 +50,7 @@ public class PersonService implements IPersonService {
                     person.setAddress(req.address());
                     return personRepository.save(person);
                 })
-                .orElseThrow(() -> new AlreadyExistsException("User already exists!"));
+                .orElseThrow(() -> new AlreadyExistsException("Person already exists!"));
     }
 
     @Override
@@ -61,6 +66,6 @@ public class PersonService implements IPersonService {
             existingPerson.setEmail(personRequest.email());
             existingPerson.setAddress(personRequest.address());
             return personRepository.save(existingPerson);
-        }).orElseThrow(() -> new ResourceNotFoundException("User does not exist!"));
+        }).orElseThrow(() -> new ResourceNotFoundException("Person not found!"));
     }
 }

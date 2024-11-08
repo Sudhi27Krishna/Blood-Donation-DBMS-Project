@@ -6,7 +6,10 @@ import com.bloodbank.backend.model.Recipient;
 import java.util.List;
 
 public interface IRecipientService {
-    Recipient createRecipient(Person person);
+    Recipient getRecipientByPersonId(Long personId);
+
+    Recipient createRecipient(Long personId);
+
     List<Recipient> getAllRecipients();
     List<Recipient> getAllRecipientsByBloodType(String bloodType);
 }

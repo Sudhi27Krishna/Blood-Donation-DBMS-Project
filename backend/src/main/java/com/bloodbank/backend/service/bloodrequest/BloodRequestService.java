@@ -27,12 +27,14 @@ public class BloodRequestService implements IBloodRequestService {
                     BloodRequest bloodRequest = new BloodRequest();
                     bloodRequest.setBloodType(request.bloodType());
                     bloodRequest.setQty(request.qty());
-                    bloodRequest.setDate(LocalDateTime.now());
+                    LocalDateTime currentDateTime = LocalDateTime.now();
+                    bloodRequest.setDate(currentDateTime);
                     bloodRequest.setRecipient(recipient);
                     // inventory deduction
                     BloodInventory bloodInventory = bloodInventoryService.acceptRequest(bloodRequest);
                     bloodRequest.setInventory(bloodInventory);
                     bloodRequest.setStatus(RequestStatus.PENDING);
+                    recipient.setLastRequestDate(currentDateTime);
                     recipient.getBloodRequestList().add(bloodRequest);
                     return bloodRequestRepository.save(bloodRequest);
                 })

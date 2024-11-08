@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RecipientRepository extends JpaRepository<Recipient, Long> {
     Recipient findByPersonId(Long id);
+
+    boolean existsByPersonId(Long pId);
 }

@@ -10,6 +10,7 @@ import java.util.List;
 public interface IPersonService {
     List<Person> getAllPersons();
     Person getPersonById(Long id);
+    List<Person> getPersonByBloodType(String bloodType);
     Person createPerson(CreatePersonRequest request);
 
     PersonDto convertToDto(Person person);
