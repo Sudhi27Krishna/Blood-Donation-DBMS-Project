@@ -4,9 +4,10 @@ import com.bloodbank.backend.dto.DonorDto;
 import com.bloodbank.backend.model.Donor;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface IDonorService {
+
+    Donor getDonorById(Long donorId);
 
     Donor getDonorByPersonId(Long personId);
 

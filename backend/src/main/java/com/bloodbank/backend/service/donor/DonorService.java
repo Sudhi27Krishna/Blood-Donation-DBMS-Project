@@ -22,9 +22,15 @@ public class DonorService implements IDonorService {
     private final ModelMapper modelMapper;
 
     @Override
+    public Donor getDonorById(Long donorId){
+        return donorRepository.findById(donorId)
+                .orElseThrow(() -> new ResourceNotFoundException("Donor not found"));
+    }
+
+    @Override
     public Donor getDonorByPersonId(Long personId){
         return Optional.ofNullable(donorRepository.findByPersonId(personId))
-                .orElseThrow(() -> new ResourceNotFoundException("Donor not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Person not found"));
     }
 
     @Override

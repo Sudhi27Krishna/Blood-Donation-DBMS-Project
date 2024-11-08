@@ -22,9 +22,15 @@ public class RecipientService implements IRecipientService {
     private final ModelMapper modelMapper;
 
     @Override
+    public Recipient getRecipientById(Long recipientId) {
+        return recipientRepository.findById(recipientId)
+                .orElseThrow(() -> new ResourceNotFoundException("Recipient not found"));
+    }
+
+    @Override
     public Recipient getRecipientByPersonId(Long personId) {
         return Optional.ofNullable(recipientRepository.findByPersonId(personId))
-                .orElseThrow(() -> new ResourceNotFoundException("Recipient not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Person not found"));
     }
 
     @Override

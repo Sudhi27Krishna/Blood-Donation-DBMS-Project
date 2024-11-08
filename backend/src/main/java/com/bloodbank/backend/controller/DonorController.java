@@ -42,8 +42,8 @@ public class DonorController {
         }
     }
 
-    @GetMapping("/{bloodType}/all")
-    public ResponseEntity<ApiResponse> getAllDonorsByBloodType(@PathVariable String bloodType){
+    @GetMapping("/by-blood-type")
+    public ResponseEntity<ApiResponse> getAllDonorsByBloodType(@RequestParam String bloodType){
         try {
             List<Donor> donorList = donorService.getAllDonorsByBloodType(bloodType);
             List<DonorDto> donorDtoList = donorList.stream().map(donorService :: convertToDto).toList();

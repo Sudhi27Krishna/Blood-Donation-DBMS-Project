@@ -1,10 +1,8 @@
 package com.bloodbank.backend.controller;
 
-import com.bloodbank.backend.dto.DonorDto;
 import com.bloodbank.backend.dto.RecipientDto;
 import com.bloodbank.backend.exception.AlreadyExistsException;
 import com.bloodbank.backend.exception.ResourceNotFoundException;
-import com.bloodbank.backend.model.Donor;
 import com.bloodbank.backend.model.Recipient;
 import com.bloodbank.backend.response.ApiResponse;
 import com.bloodbank.backend.service.recipient.IRecipientService;
@@ -44,8 +42,8 @@ public class RecipientController {
         }
     }
 
-    @GetMapping("/{bloodType}/all")
-    public ResponseEntity<ApiResponse> getAllRecipientsByBloodType(@PathVariable String bloodType){
+    @GetMapping("/by-blood-type")
+    public ResponseEntity<ApiResponse> getAllRecipientsByBloodType(@RequestParam String bloodType){
         try {
             List<Recipient> recipientList = recipientService.getAllRecipientsByBloodType(bloodType);
             List<RecipientDto> recipientDtoList = recipientList.stream().map(recipientService :: convertToDto).toList();

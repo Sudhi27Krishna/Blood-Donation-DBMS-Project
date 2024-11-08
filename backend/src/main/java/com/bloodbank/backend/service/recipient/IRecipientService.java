@@ -1,7 +1,6 @@
 package com.bloodbank.backend.service.recipient;
 
 import com.bloodbank.backend.dto.RecipientDto;
-import com.bloodbank.backend.model.Person;
 import com.bloodbank.backend.model.Recipient;
 
 import java.util.List;
@@ -15,4 +14,6 @@ public interface IRecipientService {
     List<Recipient> getAllRecipientsByBloodType(String bloodType);
 
     RecipientDto convertToDto(Recipient recipient);
+
+    Recipient getRecipientById(Long recipientId);
 }

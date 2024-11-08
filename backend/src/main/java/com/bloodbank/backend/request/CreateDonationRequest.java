@@ -1,7 +1,6 @@
 package com.bloodbank.backend.request;
 
 public record CreateDonationRequest(
-        String bloodType,
         Integer qty,
         Long donorId
 ) {

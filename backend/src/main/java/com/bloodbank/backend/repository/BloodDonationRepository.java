@@ -7,7 +7,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface BloodDonationRepository extends JpaRepository<BloodDonation, Long> {
-    List<BloodDonation> findAllByDate(LocalDateTime dateTime);
 
     List<BloodDonation> findAllByBloodType(String bloodType);
+
+    List<BloodDonation> findAllByDateBetween(LocalDateTime startOfDay, LocalDateTime endOfDay);
 }
