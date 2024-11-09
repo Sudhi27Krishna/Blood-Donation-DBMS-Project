@@ -3,6 +3,7 @@ package com.bloodbank.backend.service.blooddistribution;
 import com.bloodbank.backend.exception.ResourceNotFoundException;
 import com.bloodbank.backend.model.BloodDistribution;
 import com.bloodbank.backend.model.BloodInventory;
+import com.bloodbank.backend.model.Hospital;
 import com.bloodbank.backend.repository.BloodDistributionRepository;
 import com.bloodbank.backend.request.CreateDistributionRequest;
 import com.bloodbank.backend.service.bloodinventory.BloodInventoryService;
@@ -47,5 +48,12 @@ public class BloodDistributionService implements IBloodDistribution {
     @Override
     public List<BloodDistribution> getAllDistributions() {
         return bloodDistributionRepository.findAll();
+    }
+
+    @Override
+    public List<BloodDistribution> getDistributionByHospitalId(Long hospitalId) {
+        return Optional.ofNullable(hospitalService.getHospitalById(hospitalId))
+                .map(Hospital::getBloodDistributionList)
+                .orElseThrow(() -> new ResourceNotFoundException("List not found"));
     }
 }

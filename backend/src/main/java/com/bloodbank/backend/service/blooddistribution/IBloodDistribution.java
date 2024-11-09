@@ -9,4 +9,6 @@ public interface IBloodDistribution {
     BloodDistribution createDistribution(CreateDistributionRequest request);
     BloodDistribution getDistributionById(Long id);
     List<BloodDistribution> getAllDistributions();
+
+    List<BloodDistribution> getDistributionByHospitalId(Long hospitalId);
 }
