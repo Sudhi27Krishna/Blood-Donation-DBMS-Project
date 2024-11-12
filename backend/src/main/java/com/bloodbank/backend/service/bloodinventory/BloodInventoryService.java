@@ -1,11 +1,13 @@
 package com.bloodbank.backend.service.bloodinventory;
 
+import com.bloodbank.backend.dto.BloodInventoryDto;
 import com.bloodbank.backend.exception.ResourceNotFoundException;
 import com.bloodbank.backend.model.BloodDonation;
 import com.bloodbank.backend.model.BloodInventory;
 import com.bloodbank.backend.model.BloodRequest;
 import com.bloodbank.backend.repository.BloodInventoryRepository;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.Optional;
 @Service
 public class BloodInventoryService implements IBloodInventoryService {
     private final BloodInventoryRepository bloodInventoryRepository;
+    private final ModelMapper modelMapper;
 
     @Override
     public BloodInventory acceptDonation(BloodDonation donation) {
@@ -38,16 +41,12 @@ public class BloodInventoryService implements IBloodInventoryService {
 
     @Override
     public List<BloodDonation> getDonationListByBloodType(String bloodType) {
-        return Optional.of(bloodInventoryRepository.findById(bloodType))
-                .map(bloodInventory -> bloodInventory.get().getBloodDonationList())
-                .orElseThrow(() -> new ResourceNotFoundException("Respository of " + bloodType + " does not exist!"));
+        return getInventory(bloodType).getBloodDonationList();
     }
 
     @Override
     public List<BloodRequest> getRequestListByBloodType(String bloodType) {
-        return Optional.of(bloodInventoryRepository.findById(bloodType))
-                .map(bloodInventory -> bloodInventory.get().getBloodRequestList())
-                .orElseThrow(() -> new ResourceNotFoundException("Respository of " + bloodType + " does not exist!"));
+        return getInventory(bloodType).getBloodRequestList();
     }
 
     @Override
@@ -63,5 +62,10 @@ public class BloodInventoryService implements IBloodInventoryService {
                     bloodInventory.setBloodType(bloodType);
                     return bloodInventoryRepository.save(bloodInventory);
                 });
+    }
+
+    @Override
+    public BloodInventoryDto convertToDto(BloodInventory inventory){
+        return modelMapper.map(inventory, BloodInventoryDto.class);
     }
 }

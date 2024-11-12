@@ -47,7 +47,7 @@ public class BloodDistributionController {
     public ResponseEntity<ApiResponse> getDistributionByHospitalId(@RequestParam Long hospitalId){
         try {
             List<BloodDistribution> bloodDistributionList = bloodDistributionService.getDistributionsByHospitalId(hospitalId);
-            List<BloodDistributionDto> bloodDistributionDtoList = bloodDistributionList.stream().map(bloodDistributionService :: convertToDto).toList();
+            List<BloodDistributionDto> bloodDistributionDtoList = bloodDistributionList.stream().map(bloodDistributionService::convertToDto).toList();
             return ResponseEntity.ok(new ApiResponse("List found", bloodDistributionDtoList));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(), null));
@@ -58,7 +58,7 @@ public class BloodDistributionController {
     public ResponseEntity<ApiResponse> getAllDistributions(){
         try {
             List<BloodDistribution> bloodDistributionList = bloodDistributionService.getAllDistributions();
-            List<BloodDistributionDto> bloodDistributionDtoList = bloodDistributionList.stream().map(bloodDistributionService :: convertToDto).toList();
+            List<BloodDistributionDto> bloodDistributionDtoList = bloodDistributionList.stream().map(bloodDistributionService::convertToDto).toList();
             return ResponseEntity.ok(new ApiResponse("List found", bloodDistributionDtoList));
         } catch (Exception e) {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(new ApiResponse(e.getMessage(), null));

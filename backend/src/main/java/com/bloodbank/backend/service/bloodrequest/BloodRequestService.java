@@ -3,6 +3,7 @@ package com.bloodbank.backend.service.bloodrequest;
 import com.bloodbank.backend.dto.BloodRequestDto;
 import com.bloodbank.backend.enums.RequestStatus;
 import com.bloodbank.backend.exception.ResourceNotFoundException;
+import com.bloodbank.backend.model.BloodInventory;
 import com.bloodbank.backend.model.BloodRequest;
 import com.bloodbank.backend.repository.BloodRequestRepository;
 import com.bloodbank.backend.request.CreateBloodRequest;
@@ -32,14 +33,16 @@ public class BloodRequestService implements IBloodRequestService {
         return Optional.ofNullable(recipientService.getRecipientById(request.recipientId()))
                 .map(recipient -> {
                     BloodRequest bloodRequest = new BloodRequest();
-                    bloodRequest.setBloodType(personService.getPersonById(recipient.getPerson().getId()).getBloodType());
+                    String bloodType = personService.getPersonById(recipient.getPerson().getId()).getBloodType();
+                    bloodRequest.setBloodType(bloodType);
                     bloodRequest.setQty(request.qty());
                     LocalDateTime currentDateTime = LocalDateTime.now();
                     bloodRequest.setDate(currentDateTime);
                     bloodRequest.setRecipient(recipient);
                     // inventory deduction
 //                    BloodInventory bloodInventory = bloodInventoryService.acceptRequest(bloodRequest);
-//                    bloodRequest.setInventory(bloodInventory);
+                    BloodInventory bloodInventory = bloodInventoryService.getInventory(bloodType);
+                    bloodRequest.setInventory(bloodInventory);
                     bloodRequest.setStatus(RequestStatus.PENDING);
                     recipient.setLastRequestDate(currentDateTime);
                     recipient.getBloodRequestList().add(bloodRequest);

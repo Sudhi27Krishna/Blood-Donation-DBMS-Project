@@ -1,5 +1,6 @@
 package com.bloodbank.backend.service.bloodinventory;
 
+import com.bloodbank.backend.dto.BloodInventoryDto;
 import com.bloodbank.backend.model.BloodDonation;
 import com.bloodbank.backend.model.BloodInventory;
 import com.bloodbank.backend.model.BloodRequest;
@@ -14,4 +15,6 @@ public interface IBloodInventoryService {
     List<BloodInventory> getAllInventory();
 
     BloodInventory getInventory(String bloodType);
+
+    BloodInventoryDto convertToDto(BloodInventory inventory);
 }
