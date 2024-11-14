@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -61,6 +60,28 @@ public class BloodRequestController {
             List<BloodRequest> bloodRequestList = bloodRequestService.getBloodRequestsByDate(date);
             List<BloodRequestDto> bloodRequestDtoList = bloodRequestList.stream().map(bloodRequestService::convertToDto).toList();
             return ResponseEntity.ok(new ApiResponse("List found", bloodRequestDtoList));
+        } catch (Exception e) {
+            return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(new ApiResponse(e.getMessage(), null));
+        }
+    }
+
+    @PutMapping("/accept-blood-request")
+    public ResponseEntity<ApiResponse> acceptBloodRequest(@RequestParam Long id){
+        try {
+            BloodRequest bloodRequest = bloodRequestService.acceptBloodRequest(id);
+            BloodRequestDto bloodRequestDto = bloodRequestService.convertToDto(bloodRequest);
+            return ResponseEntity.ok(new ApiResponse("Request Fulfilled", bloodRequestDto));
+        } catch (Exception e) {
+            return ResponseEntity.status(CONFLICT).body(new ApiResponse(e.getMessage(), null));
+        }
+    }
+
+    @PutMapping("/reject-blood-request")
+    public ResponseEntity<ApiResponse> rejectBloodRequest(@RequestParam Long id){
+        try {
+            BloodRequest bloodRequest = bloodRequestService.rejectBloodRequest(id);
+            BloodRequestDto bloodRequestDto = bloodRequestService.convertToDto(bloodRequest);
+            return ResponseEntity.ok(new ApiResponse("Request Denied", bloodRequestDto));
         } catch (Exception e) {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(new ApiResponse(e.getMessage(), null));
         }

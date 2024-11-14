@@ -33,6 +33,9 @@ public class BloodInventoryService implements IBloodInventoryService {
     public BloodInventory acceptRequest(BloodRequest request) {
         return Optional.of(getInventory(request.getBloodType()))
                 .map(bloodInventory -> {
+                    if(bloodInventory.getAvailableQty() < request.getQty()){
+                        throw new ResourceNotFoundException("Not enough blood quantity in inventory!");
+                    }
                     bloodInventory.acceptRequest(request);
                     return bloodInventoryRepository.save(bloodInventory);
                 })

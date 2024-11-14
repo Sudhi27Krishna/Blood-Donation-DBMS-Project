@@ -69,6 +69,30 @@ public class BloodRequestService implements IBloodRequestService {
     }
 
     @Override
+    public BloodRequest getBloodRequestById(Long id){
+        return bloodRequestRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Request not found!"));
+    }
+
+    // ADMIN access only
+    @Override
+    public BloodRequest acceptBloodRequest(Long id){
+        BloodRequest bloodRequest = getBloodRequestById(id);
+        BloodInventory bloodInventory = bloodInventoryService.acceptRequest(bloodRequest);
+        bloodRequest.setInventory(bloodInventory);
+        bloodRequest.setStatus(RequestStatus.FULFILLED);
+        return bloodRequestRepository.save(bloodRequest);
+    }
+
+    // ADMIN access only
+    @Override
+    public BloodRequest rejectBloodRequest(Long id){
+        BloodRequest bloodRequest = getBloodRequestById(id);
+        bloodRequest.setStatus(RequestStatus.DENIED);
+        return bloodRequestRepository.save(bloodRequest);
+    }
+
+    @Override
     public BloodRequestDto convertToDto(BloodRequest bloodRequest) {
         return modelMapper.map(bloodRequest, BloodRequestDto.class);
     }

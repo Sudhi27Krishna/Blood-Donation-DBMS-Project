@@ -14,5 +14,11 @@ public interface IBloodRequestService {
 
     List<BloodRequest> getAllBloodRequests();
 
+    BloodRequest getBloodRequestById(Long id);
+
+    BloodRequest acceptBloodRequest(Long id);
+
+    BloodRequest rejectBloodRequest(Long id);
+
     BloodRequestDto convertToDto(BloodRequest bloodRequest);
 }
