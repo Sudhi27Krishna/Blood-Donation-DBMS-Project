@@ -20,6 +20,10 @@ public class Person {
     private String email;
     private String address;
 
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @OneToOne(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
     private Donor donor;
 

@@ -6,6 +6,7 @@ public record CreatePersonRequest(
         Integer age,
         String bloodType,
         String email,
-        String address
+        String address,
+        Long userId
 ) {
 }

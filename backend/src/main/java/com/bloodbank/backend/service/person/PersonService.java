@@ -4,9 +4,11 @@ import com.bloodbank.backend.dto.PersonDto;
 import com.bloodbank.backend.exception.AlreadyExistsException;
 import com.bloodbank.backend.exception.ResourceNotFoundException;
 import com.bloodbank.backend.model.Person;
+import com.bloodbank.backend.model.User;
 import com.bloodbank.backend.repository.PersonRepository;
 import com.bloodbank.backend.request.CreatePersonRequest;
 import com.bloodbank.backend.request.UpdatePersonRequest;
+import com.bloodbank.backend.service.user.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class PersonService implements IPersonService {
     private final PersonRepository personRepository;
+    private final IUserService userService;
     private final ModelMapper modelMapper;
 
     @Override
@@ -41,6 +44,8 @@ public class PersonService implements IPersonService {
         return Optional.of(request)
                 .filter(person -> !personRepository.existsByEmail(person.email()))
                 .map(req -> {
+                    User user = userService.getUserById(request.userId());
+
                     Person person = new Person();
                     person.setName(req.name());
                     person.setAge(req.age());
@@ -48,6 +53,7 @@ public class PersonService implements IPersonService {
                     person.setEmail(req.email());
                     person.setBloodType(req.bloodType());
                     person.setAddress(req.address());
+                    person.setUser(user);
                     return personRepository.save(person);
                 })
                 .orElseThrow(() -> new AlreadyExistsException("Person already exists!"));

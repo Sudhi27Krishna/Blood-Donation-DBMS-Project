@@ -1,4 +1,4 @@
-package com.bloodbank.backend.config;
+package com.bloodbank.backend.security.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
