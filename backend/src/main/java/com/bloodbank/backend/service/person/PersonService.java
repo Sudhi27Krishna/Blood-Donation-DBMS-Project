@@ -35,6 +35,12 @@ public class PersonService implements IPersonService {
     }
 
     @Override
+    public Person getPersonByUserId(Long userId) {
+        User user = userService.getUserById(userId);
+        return personRepository.findByUser(user);
+    }
+
+    @Override
     public List<Person> getPersonByBloodType(String bloodType) {
         return personRepository.findByBloodType(bloodType);
     }

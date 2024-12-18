@@ -41,24 +41,37 @@ public class JwtUtils {
         return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
     }
 
-    public String getUsernameFromJwtToken(String token) {
-        return Jwts.parserBuilder()
-                .setSigningKey(key())
-                .build()
-                .parseClaimsJwt(token)
-                .getBody().getSubject();
+    // Method to extract username from the JWT token
+    public String getUsernameFromJwtToken(String jwtToken) {
+        return extractClaim(jwtToken, Claims::getSubject);
     }
 
-    public boolean validateJwtToken(String authToken) {
+    // Method to extract a specific claim from the JWT token
+    private <T> T extractClaim(String jwtToken, java.util.function.Function<Claims, T> claimsResolver) {
+        final Claims claims = extractAllClaims(jwtToken);
+        return claimsResolver.apply(claims);
+    }
+
+    // Method to extract all claims from the JWT token
+    private Claims extractAllClaims(String jwtToken) {
+        return Jwts.parser()
+                .setSigningKey(key())
+                .parseClaimsJws(jwtToken)
+                .getBody();
+    }
+
+    // Method to validate a JWT token
+    public boolean validateJwtToken(String jwtToken) {
         try {
-            Jwts.parserBuilder()
-                    .setSigningKey(key())
-                    .build()
-                    .parseClaimsJwt(authToken);
-            return true;
-        } catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException | SignatureException |
-                 IllegalArgumentException e) {
-            throw new JwtException(e.getMessage());
+            return !isTokenExpired(jwtToken);
+        } catch (SignatureException | IllegalArgumentException e) {
+            return false; // Invalid token
         }
+    }
+
+    // Method to check if the token is expired
+    private boolean isTokenExpired(String jwtToken) {
+        final Claims claims = extractAllClaims(jwtToken);
+        return claims.getExpiration().before(new java.util.Date());
     }
 }

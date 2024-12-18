@@ -33,6 +33,17 @@ public class PersonController {
         }
     }
 
+    @GetMapping("/{userId}/person-by-userId")
+    public ResponseEntity<ApiResponse> getPersonByUserId(@PathVariable Long userId){
+        try {
+            Person person = personService.getPersonByUserId(userId);
+            PersonDto personDto = personService.convertToDto(person);
+            return ResponseEntity.ok(new ApiResponse("Person found!", personDto));
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(), null));
+        }
+    }
+
     @GetMapping("/all")
     public ResponseEntity<ApiResponse> getAllPersons(){
         List<Person> personList = personService.getAllPersons();
@@ -46,7 +57,7 @@ public class PersonController {
             Person person = personService.createPerson(request);
             PersonDto personDto = personService.convertToDto(person);
             return ResponseEntity.ok(new ApiResponse("Create person success!", personDto));
-        } catch (AlreadyExistsException e) {
+        } catch (AlreadyExistsException | ResourceNotFoundException e) {
             return ResponseEntity.status(CONFLICT).body(new ApiResponse(e.getMessage(), null));
         }
     }

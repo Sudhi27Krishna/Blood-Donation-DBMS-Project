@@ -1,7 +1,7 @@
 package com.bloodbank.backend.security.user;
 
 import com.bloodbank.backend.model.User;
-import com.bloodbank.backend.service.user.IUserService;
+import com.bloodbank.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,11 +13,11 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class BBUserDetailsService implements UserDetailsService {
-    private final IUserService userService;
+    private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = Optional.ofNullable(userService.getUserByUsername(username))
+        User user = Optional.ofNullable(userRepository.findByUsername(username))
                 .orElseThrow(() -> new UsernameNotFoundException(username));
         return BBUserDetails.buildUserDetails(user);
     }
